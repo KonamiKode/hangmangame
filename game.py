@@ -16,7 +16,7 @@ print "Start guessing..."
 time.sleep(0.5)
 
 #here we set the secret
-word = "secret"
+word = "apprenticeship"
 
 #creates an variable with an empty value
 guesses = ''
@@ -74,8 +74,7 @@ You won"
         turns -= 1        
  
     # print wrong
-        print "Wrong
-"    
+        print "Wrong"    
  
     # how many turns are left
         print "You have", + turns, 'more guesses' 
@@ -83,6 +82,5 @@ You won"
     # if the turns are equal to zero
         if turns == 0:           
     
-        # print "You Loose"
-            print "You Loose
-"  
+        # print "You Lose"
+            print "You lose"  
