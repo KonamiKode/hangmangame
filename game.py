@@ -1,86 +1,101 @@
-#importing the time module
-import time
+import random
+import sys
 
-#welcoming the user
-name = raw_input("What is your name? ")
 
-print "Hello, " + name, "Time to play hangman!"
+# lets set some variables
+wordList = [
+"deadpool", "avenger", "hulk", "spider", "shield", "fury", "chair", "desktop",
+ "laptop", "dog", "cat", "lemon", "cable", "mirror", "hat"
+           ]
 
-print "
-"
+guess_word = []
+secretWord = random.choice(wordList) # lets randomize single word from the list
+length_word = len(secretWord)
+alphabet = "abcdefghijklmnopqrstuvwxyz"
+letter_storage = []
+playername = []
 
-#wait for 1 second
-time.sleep(1)
 
-print "Start guessing..."
-time.sleep(0.5)
+def beginning():
+    print("Hello!\n")
 
-#here we set the secret
-word = "apprenticeship"
+    while True:
+        playername = input("It's nice to meet you. What's your name?\n").strip()
 
-#creates an variable with an empty value
-guesses = ''
-
-#determine the number of turns
-turns = 10
-
-# Create a while loop
-
-#check if the turns are more than zero
-while turns > 0:         
-
-    # make a counter that starts with zero
-    failed = 0             
-
-    # for every character in secret_word    
-    for char in word:      
-
-    # see if the character is in the players guess
-        if char in guesses:    
-    
-        # print then out the character
-            print char,    
-
+        if playername == '':
+            print("You can't do that! No blank lines")
         else:
-    
-        # if not found, print a dash
-            print "_",     
-       
-        # and increase the failed counter with one
-            failed += 1    
+            break
+    print(playername)
 
-    # if failed is equal to zero
+beginning()
 
-    # print You Won
-    if failed == 0:        
-        print "
-You won"  
 
-    # exit the script
-        break              
 
-    print
+def newFunc():
+    print("Okay ", playername, ", would you like to play Hangman?\n")
 
-    # ask the user go guess a character
-    guess = raw_input("guess a character:") 
+    while True:
+        gameChoice = input("Would You? Enter Y/N\n").upper()
 
-    # set the players guess to guesses
-    guesses += guess                    
+        if gameChoice == "YES" or gameChoice == "Y":
+            break
+        elif gameChoice == "NO" or gameChoice == "N":
+            sys.exit("That's a shame! Have a nice day")
+        else:
+            print("Please Answer only Yes or No")
+            continue
 
-    # if the guess is not found in the secret word
-    if guess not in word:  
- 
-     # turns counter decreases with 1 (now 9)
-        turns -= 1        
- 
-    # print wrong
-        print "Wrong"    
- 
-    # how many turns are left
-        print "You have", + turns, 'more guesses' 
- 
-    # if the turns are equal to zero
-        if turns == 0:           
-    
-        # print "You Lose"
-            print "You lose"  
+newFunc()
+
+
+
+def change():
+
+    for character in secretWord: # printing blanks for each letter in secret word
+        guess_word.append("-")
+
+    print("Ok, so the word You need to guess has", length_word, "characters")
+
+    print("Be aware that You can enter only 1 letter from a-z\n\n")
+
+    print(guess_word)
+
+
+
+def guessing():
+    guess_taken = 1
+
+    while guess_taken < 10:
+
+
+        guess = input("Pick a letter\n").lower()
+
+        if not guess in alphabet: #checking input
+            print("Enter a letter from a-z alphabet")
+        elif guess in letter_storage: #checking if letter has been already used
+            print("You have already guessed that letter!")
+        else: 
+
+            letter_storage.append(guess)
+            if guess in secretWord:
+                print("You guessed correctly!")
+                for x in range(0, length_word): #This Part I just don't get it
+                    if secretWord[x] == guess:
+                        guess_word[x] = guess
+                        print(guess_word)
+
+                if not '-' in guess_word:
+                    print("You won!")
+                    break
+            else:
+                print("The letter is not in the word. Try Again!")
+                guess_taken += 1
+                if guess_taken == 10:
+                    print("Sorry", playername, ", You lost! The secret word was",         secretWord)
+
+
+change()
+guessing()
+
+print("Game Over!")
