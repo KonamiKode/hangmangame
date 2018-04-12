@@ -5,17 +5,14 @@ import sys
 # welcoming the user
 name = input("What is your name? ")
 
-print
-"Hello, " + name, "Time to play hangman!"
+print("Hello, " + name, "Time to play hangman!")
 
-print
-""
+print("")
 
 # wait for 1 second
 time.sleep(1)
 
-print
-"Start guessing..."
+print("Start guessing...")
 time.sleep(0.5)
 
 # generates random word
@@ -50,14 +47,12 @@ while turns > 0:
         if char in guesses:
 
             # print then out the character
-            print
-            char,
+            print(char,)
 
         else:
 
             # if not found, print a dash
-            print
-            "_",
+            print("_",)
 
             # and increase the failed counter with one
             failed += 1
@@ -66,8 +61,7 @@ while turns > 0:
 
     # print You Won
     if failed == 0:
-        print
-        "You won"
+        print("You won")
 
         # exit the script
         break
@@ -87,18 +81,14 @@ while turns > 0:
         turns -= 1
 
         # print wrong
-        print
-        "Wrong"
+        print("Wrong")
 
         # how many turns are left
-        print
-        "You have", + turns, 'more guesses'
+        print("You have", + turns, 'more guesses')
 
         # if the turns are equal to zero
         if turns == 0:
             # print "You Lost"
-            print
-            "You Lost, sad face"
-            print
-            "the word was:"
+            print("You Lost :(")
+            print("the word was:")
             print(word)
